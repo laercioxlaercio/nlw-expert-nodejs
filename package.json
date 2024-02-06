@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/laercioxlaercio/nlw-expert-nodejs/issues"
   },
-  "homepage": "https://github.com/laercioxlaercio/nlw-expert-nodejs#readme"
+  "homepage": "https://github.com/laercioxlaercio/nlw-expert-nodejs#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
+  }
 }
