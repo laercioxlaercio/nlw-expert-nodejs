@@ -4,7 +4,7 @@
   "description": "Real-time polling system.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/http/server.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,12 @@
   "homepage": "https://github.com/laercioxlaercio/nlw-expert-nodejs#readme",
   "devDependencies": {
     "@types/node": "^20.11.16",
+    "prisma": "^5.9.1",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.1",
+    "fastify": "^4.26.0"
   }
 }
