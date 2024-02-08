@@ -12,9 +12,9 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3333/polls/7c79d967-acbc-4683-8961-2b3ba255e6ad/votes HTTP/1.1
+POST http://localhost:3333/polls/7c79d967-acbc-4683-8961-2b3ba255e6ad/votes HTTP/1.19401e53c-9f91-4773-8f58-816a73972e1e
 content-type: application/json
 
 {
-  "pollOptionId": "9401e53c-9f91-4773-8f58-816a73972e1e"
+  "pollOptionId": "bfb5f632-1088-4d98-a222-08c9a869ff35"
 }
