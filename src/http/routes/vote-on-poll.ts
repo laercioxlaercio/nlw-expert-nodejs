@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
 import { FastifyInstance } from 'fastify';
 import { prisma } from '../../lib/prisma';
+import { redis } from '../../lib/redis';
+import { voting } from '../../utils/voting-pub-sub';
 
 export async function voteOnPoll(app: FastifyInstance) {
   // route for vote on poll
@@ -38,6 +40,17 @@ export async function voteOnPoll(app: FastifyInstance) {
             id: previousUserVoteOnPoll.id,
           },
         });
+
+        const votes = await redis.zincrby(
+          pollId,
+          -1,
+          previousUserVoteOnPoll.pollOptionId,
+        );
+
+        voting.publish(pollId, {
+          pollOptionId: previousUserVoteOnPoll.pollOptionId,
+          votes: Number(votes),
+        });
       } else if (previousUserVoteOnPoll) {
         return reply
           .status(400)
@@ -62,6 +75,13 @@ export async function voteOnPoll(app: FastifyInstance) {
         pollId,
         pollOptionId,
       },
+    });
+
+    const votes = await redis.zincrby(pollId, 1, pollOptionId); // This increments each option by 1 in a single poll
+
+    voting.publish(pollId, {
+      pollOptionId,
+      votes: Number(votes),
     });
 
     return reply.status(201).send();
